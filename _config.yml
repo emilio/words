@@ -1,15 +1,16 @@
 # Site settings
-title: Emilio Cobos
-email: emiliocobos@usal.es
+title: Words
+email: emilio@crisal.io
 emails:
   - emiliocobos@usal.es
   - ecoal95@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Code is poetry
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://emiliocobos.me"
+baseurl: "/words"
+url: "http://crisal.io"
 twitter_username: ecbos_
-github_username: ecoal95
+github_username: emilio
 
 # Build settings
-markdown: redcarpet
+future: true
+# markdown: redcarpet

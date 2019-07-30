@@ -4,15 +4,15 @@ title: About
 permalink: /about/
 ---
 
-Hi! My name is Emilio Cobos, and I'm a CS student in [University of Salamanca](https://usal.es).
+Hi! My name is Emilio, and I work for [Mozilla](https://mozilla.org) on Gecko,
+Firefox's rendering engine.
 
-I love coding and learning new things.
-Hopefully I'll take my time to write them up here.
+I'm also lucky enough to do various Rust things, and work on CSS standards with
+the awesome folks at the [CSS WG](https://github.com/w3c/csswg-drafts).
 
-My primary interests as of right now are systems programming and low level graphics.
-They tend to vary hugely over time (which I consider good).
+I do various other stuff, which are usually public and accessible in
+[my GitHub profile](https://github.com/emilio). I also have an (under used)
+[GitLab profile](https://gitlab.com/eca).
 
-As of today, I don't really know what to write here. Maybe I write some quirks I think people could find useful, maybe I post some course notes...
-
-You can checkout my [resume](/resume.pdf), my [GitHub profile](https://github.com/ecoal95), my [Gitlab account](https://gitlab.com/eca) or my [Twitter](https://twitter.com/ecbos_).
-
+To reach out you can [email me](mailto:emilio@crisal.io), or mention me on
+[Twitter](https://twitter.com/ecbos_), or something :)
