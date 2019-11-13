@@ -254,7 +254,7 @@ for the test to finish... right?
 And that's where something clicked, and I went to see the `waitForCondition`
 implementation:
 
-```
+```js
 /**
  * Will poll a condition function until it returns true.
  *
@@ -320,4 +320,5 @@ promises, leaking the window.
 Once I understood this, fixing it wasn't that bad (hopefully, assuming my
 reviewer likes the patch :)).
 
-Till next time.
+Till next time. Oh, and thanks to Andrew Mccreight and Olli Pettay for all their
+help figuring out the rough edges here :)
