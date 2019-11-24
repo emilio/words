@@ -4,15 +4,20 @@ title: About
 permalink: /about/
 ---
 
-Hi! My name is Emilio, and I work for [Mozilla](https://mozilla.org) on Gecko,
-Firefox's rendering engine.
+<div class="h-card">
 
-I'm also lucky enough to do various Rust things, and work on CSS standards with
-the awesome people at the [CSS WG](https://github.com/w3c/csswg-drafts).
+<p>Hi! My name is <span class="p-name">Emilio</span>, and I work for
+<a href="https://mozilla.org">Mozilla</a> on Gecko, Firefox's rendering engine.
 
-I do various other stuff, which are usually public and accessible in
-[my GitHub profile](https://github.com/emilio). I also have an (under used)
-[GitLab profile](https://gitlab.com/eca).
+<p>I'm also lucky enough to do various Rust things, and work on CSS standards with
+the awesome people at the <a href="https://github.com/w3c/csswg-drafts">CSS WG</a>.
 
-To reach out you can [email me](mailto:emilio@crisal.io), or mention me on
-[Twitter](https://twitter.com/ecbos_), or something :)
+<p>I do various other stuff, which are usually public and accessible in
+<a rel="me" href="https://github.com/emilio">my GitHub profile</a>. I also have
+an (under used) <a href="https://gitlab.com/eca">GitLab profile</a>.
+
+<p>To reach out you can <a class="u-email" href="mailto:emilio@crisal.io">email
+me</a>, or mention me on <a href="https://twitter.com/ecbos_">Twitter</a>, or
+something :)
+
+</div>
