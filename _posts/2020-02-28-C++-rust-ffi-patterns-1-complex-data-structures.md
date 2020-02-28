@@ -81,21 +81,21 @@ the following caveats:
    to prevent people from shooting themselves in the foot.
 
  * You need to **duplicate manual `Drop` implementations** in C++. This is
-   usually not a big deal (the only thing that usually need manual drop
-   implementations is data-structures or such). Here's
+   usually not a big deal (the only things that usually need manual drop
+   implementations are data-structures or such). Here's
    [an](https://searchfox.org/mozilla-central/rev/b2ccce862ef38d0d150fcac2b597f7f20091a0c7/servo/ports/geckolib/cbindgen.toml#514)
    [example](https://searchfox.org/mozilla-central/rev/b2ccce862ef38d0d150fcac2b597f7f20091a0c7/layout/style/ServoStyleConstsInlines.h#135)
    which I'll talk about later.
 
-These haven't been a problem in practice for us. It's a bit more of a complex
-setup than just declaring and using FFI functions, but it pays off by not having
-to do manual memory management in C++.
+These haven't been a problem in practice for us. It's a bit more complex setup
+than just declaring and using FFI functions, but it pays off by not having to do
+manual memory management in C++.
 
 ## Demo
 
 I've put a simple
 [demo](https://github.com/emilio/rust-cpp-ffi-examples/tree/master/complex-rust-to-cpp)
-on a GitHub repo of a minimal setup for this.
+on a GitHub repo of a somewhat-minimal setup for this.
 
 In practice there's a few differences from the Firefox setup. On Firefox:
 
@@ -106,9 +106,9 @@ In practice there's a few differences from the Firefox setup. On Firefox:
    [`rust-bindgen`](https://github.com/rust-lang/rust-bindgen) to be able to
    poke at C++ structs and classes, for a variety of reasons.
 
-But those shouldn't really matter for this example. Modulo those caveats, it
-should hopefully be a good overview of how the setup works. Here's the different
-parts of the demo, explained step by step.
+But those shouldn't really matter for this example. Modulo those, it should
+hopefully be a good overview of how the setup works. Here's the different parts
+of the demo, explained step by step.
 
 ### The program we want to build
 
