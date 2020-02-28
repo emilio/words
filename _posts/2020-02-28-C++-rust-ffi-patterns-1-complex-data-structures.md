@@ -65,8 +65,8 @@ step-by-step example below.
 
 The plus side is of course that you win idiomatic C++ code, with all the gnarly
 boring stuff generated for you. You can poke at Rust structs directly, get
-pointers to it, copy it, all without having to define an FFI function for each
-operation you want to perform. Sounds amazing!
+pointers to them, copy them, all without having to define an FFI function for
+each operation you want to perform. Sounds amazing!
 
 However, nothing is free, and if you go for this approach you need to consider
 the following caveats:
@@ -905,6 +905,11 @@ I switched Firefox to use `cbindgen` for the transform property. It:
 Over time, we've needed a couple more data structures. We have C++-compatible
 versions of:
 
+ * [`OwnedStr`](https://searchfox.org/mozilla-central/rev/b2ccce862ef38d0d150fcac2b597f7f20091a0c7/servo/components/style_traits/owned_str.rs#17):
+   an owned utf-8 string (basically, `Box<str>`). It's built on top of
+   `OwnedSlice` so it doesn't even need manual destructors and such, just some
+   convenience method to get the string as a Gecko substring.
+
  * [`Arc`](https://searchfox.org/mozilla-central/rev/b2ccce862ef38d0d150fcac2b597f7f20091a0c7/servo/components/servo_arc/lib.rs#78):
    We already had our own `Arc` copy for various reasons (to avoid weak
    reference count overhead, for other ffi shenanigans, and to add
@@ -912,7 +917,7 @@ versions of:
    trivial. There's a [crates.io version](https://crates.io/crates/triomphe) of
    this which Manish maintains.
 
- * [`ArcSlice`](https://searchfox.org/mozilla-central/rev/b2ccce862ef38d0d150fcac2b597f7f20091a0c7/servo/components/style_traits/arc_slice.rs#30),
+ * [`ArcSlice`](https://searchfox.org/mozilla-central/rev/b2ccce862ef38d0d150fcac2b597f7f20091a0c7/servo/components/style_traits/arc_slice.rs#30):
    an `Arc<[T]>`, but stored as a thin pointer, built on top of that.
    It should also be buildable on top of triomphe, though I don't think
    Firefox's version is general-purpose enough to put on crates.io. Maybe,
