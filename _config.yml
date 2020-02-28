@@ -14,3 +14,6 @@ github_username: emilio
 # Build settings
 future: true
 # markdown: redcarpet
+kramdown:
+  input: GFM
+  parse_block_html: true
