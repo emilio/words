@@ -7,7 +7,7 @@ date:   2020-02-28 00:20:00
 I've been meaning to post about this for a while. I plan to start a series on
 different patterns for Rust / C++ FFI that are being used in Gecko.
 
-I don't know how many posts would this take, and given I'm a not-very-consistent
+I don't know how many posts this would take, and given I'm a not-very-consistent
 writer, I think I'm going to start with the most complex one to get it done.
 
 This is the pattern that Firefox's style system uses.
@@ -50,13 +50,13 @@ So this pattern seems like a good fit for us.
 
 The plan to accomplish it is not too complex on the surface:
 
- * Get [`cbindgen`](https://github.com/eqrion/cbindgen) to generate a bunch of
-   idiomatic C++ code based on our gazillion Rust types.
+ 1. Get [`cbindgen`](https://github.com/eqrion/cbindgen) to generate a bunch of
+    idiomatic C++ code based on our gazillion Rust types.
 
- * Have equivalent C++ implementations of your core Rust data-structures, with
-   destructors / proper semantics, and so on.
+ 2. Have equivalent C++ implementations of your core Rust data-structures, with
+    destructors / proper semantics, and so on.
 
- * Profit?
+ 3. Profit?
 
 We'll go about all the details of how to make that happen, as well as a proper
 step-by-step example below.
@@ -100,7 +100,7 @@ on a GitHub repo of a somewhat-minimal setup for this.
 In practice there's a few differences from the Firefox setup. On Firefox:
 
  * The C++ code is not built from `build.rs` (as you may imagine).
- * `cbindgen` is ran as a CLI tool, because of that. We need the headers
+ * `cbindgen` is run as a CLI tool, because of that. We need the headers
    exported independently of the rust build.
  * We have bindings in _both_ directions, actually, so we also use
    [`rust-bindgen`](https://github.com/rust-lang/rust-bindgen) to be able to
@@ -142,7 +142,7 @@ Or something like that.
 ### Exposing the type to C++
 
 Let's see what `cbindgen` thinks about our `TreeNode` type. When running it on
-the following Rust program:
+the following Rust file:
 
 ```rust
 #[derive(Clone, Debug)]
@@ -189,9 +189,10 @@ rfc](https://github.com/rust-lang/rfcs/blob/master/text/2195-really-tagged-union
 and the [nomicon](https://doc.rust-lang.org/nomicon/other-reprs.html) for the
 details.
 
-Now the layout of `Box<[TreeNode]>` and `Box<TreeNode>` should be
+With that out of the way, the layout of `Box<[TreeNode]>` and `Box<TreeNode>`
+should be
 [well-defined](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/reference/src/layout/pointers.md),
-can cbindgen do the right thing for us?
+so can cbindgen do the right thing for us?
 
 The answer is "not quite". `cbindgen` doesn't understand `Box<[T]>` deeply
 enough, and assumes the type is not FFI-safe. I just [filed an
@@ -205,7 +206,7 @@ So for now we're going to do this manually.
 
 [`OwnedSlice<T>`](https://github.com/emilio/rust-cpp-ffi-examples/blob/master/complex-rust-to-cpp/src/owned_slice.rs)
 is going to be our **ffi-friendly replacement for `Box<[T]>`**. It's a very
-straight-forward type, taken [almost
+straightforward type, taken [almost
 verbatim](https://searchfox.org/mozilla-central/rev/b2ccce862ef38d0d150fcac2b597f7f20091a0c7/servo/components/style_traits/owned_slice.rs)
 from Firefox.
 
@@ -305,7 +306,7 @@ derive_helper_methods = true
 derive_const_casts = true
 # Adds an `assert(IsFoo())` on each `AsFoo()` method.
 cast_assert_name = "assert"
-# Generates destructors
+# Generates destructors.
 derive_tagged_enum_destructor = true
 # Generates copy-constructors.
 derive_tagged_enum_copy_constructor = true
@@ -332,7 +333,7 @@ a `forwards.h` file from cbindgen.toml.
 
 [The
 implementation](https://github.com/emilio/rust-cpp-ffi-examples/blob/master/complex-rust-to-cpp/cpp/my_ffi_forwards.h)
-should be pretty straight-forward so I won't read through it.
+should be pretty straightforward so I won't read through it.
 
 This makes our bindings compile, but still `OwnedSlice` has issues.
 
@@ -397,7 +398,7 @@ trailer = """
 
 [That
 file](https://github.com/emilio/rust-cpp-ffi-examples/blob/master/complex-rust-to-cpp/cpp/my_ffi_inlines.h)
-is also relatively straight-forward, and it basically keeps the same invariants
+is also relatively straightforward, and it basically keeps the same invariants
 as the Rust counterpart does.
 
 ### The actual C++ code.
@@ -440,18 +441,18 @@ versions of:
  * [`OwnedStr`](https://searchfox.org/mozilla-central/rev/b2ccce862ef38d0d150fcac2b597f7f20091a0c7/servo/components/style_traits/owned_str.rs#17):
    an owned utf-8 string (basically, `Box<str>`). It's built on top of
    `OwnedSlice` so it doesn't even need manual destructors and such, just some
-   convenience method to get the string as a Gecko substring.
+   convenience methods to get the string as a Gecko substring.
 
  * [`Arc`](https://searchfox.org/mozilla-central/rev/b2ccce862ef38d0d150fcac2b597f7f20091a0c7/servo/components/servo_arc/lib.rs#78):
    We already had our own `Arc` copy for various reasons (to avoid weak
    reference count overhead, for other ffi shenanigans, and to add
    reference-count logging to detect leaks). Switching it to this model was
    trivial. There's a [crates.io version](https://crates.io/crates/triomphe) of
-   this which Manish maintains.
+   this called Triomphe which Manish maintains.
 
  * [`ArcSlice`](https://searchfox.org/mozilla-central/rev/b2ccce862ef38d0d150fcac2b597f7f20091a0c7/servo/components/style_traits/arc_slice.rs#30):
    an `Arc<[T]>`, but stored as a thin pointer, built on top of that.
-   It should also be buildable on top of triomphe, though I don't think
+   It should also be buildable on top of Triomphe, though I don't think
    Firefox's version is general-purpose enough to put on crates.io. Maybe,
    though?
 
@@ -468,10 +469,13 @@ I personally don't love to have duplicate code for our data-structures in both
 Rust and C++. But for us it works out alright: the benefits we get (nice
 idiomatic C++ code, having all our style system structs defined in Rust, which
 can use a bunch of proc macros, and having them interoperate seamlessly with
-C++) is definitely worth a couple duplicated boring lines.
+C++) are definitely worth a couple duplicated boring lines.
 
 Congratulations if you made it all the way here. I hope I didn't write too many
-typos in the process, my English always sucks... Feel free to send comments or
-corrections to [my email](mailto:emilio@crisal.io),
+typos in the process, my English always sucks... Thanks to
+[Daniel](https://twitter.com/CodingExon) for spotting a bunch already :)
+
+Feel free to send comments or corrections to [my
+email](mailto:emilio@crisal.io),
 [Twitter](https://twitter.com/ecbos_), or to
 [GitHub](https://github.com/emilio/words) directly, your call.
