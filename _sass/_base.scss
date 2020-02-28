@@ -128,23 +128,23 @@ blockquote {
 /**
  * Code formatting
  */
-pre,
-code {
-  font-size: 15px;
+pre, code {
   border: 1px solid $grey-color-light;
   border-radius: 3px;
-  background-color: #eef;
 }
 
 code {
+  background-color: #eef;
   padding: 1px 5px;
 }
 
 pre {
+  font-size: 15px;
   padding: 8px 12px;
   overflow-x: auto;
 
   > code {
+    background-color: initial;
     border: 0;
     padding-right: 0;
     padding-left: 0;
