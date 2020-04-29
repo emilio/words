@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  Shutdown leak hunting.
+title:  Hunting an intermittent leak until shutdown.
 date:   2019-11-13 14:38:00
 ---
 
 This week I had to debug an [intermittent
 leak-until-shutdown](https://bugzilla.mozilla.org/show_bug.cgi?id=1595573) which
-seemed to be caused by a fairly inoccent [test
+seemed to be caused by a fairly innocent [test
 change](https://hg.mozilla.org/integration/autoland/rev/e19c5df398de#l22.10).
 
 As it turns out, the issue was not my fault (yay), but it was quite a pain to
