@@ -1,6 +1,3 @@
-/**
- * Site header
- */
 .site-header {
   border-top: 5px solid $grey-color-dark;
   border-bottom: 1px solid $grey-color-light;
@@ -86,11 +83,6 @@
   }
 }
 
-
-
-/**
- * Site footer
- */
 .site-footer {
   border-top: 1px solid $grey-color-light;
   padding: $spacing-unit 0;
@@ -121,46 +113,35 @@
 }
 
 .footer-col-1 {
-  width: -webkit-calc(35% - (#{$spacing-unit} / 2));
-  width:     calc(35% - (#{$spacing-unit} / 2));
+  width: calc(35% - (#{$spacing-unit} / 2));
 }
 
 .footer-col-2 {
-  width: -webkit-calc(20% - (#{$spacing-unit} / 2));
-  width:     calc(20% - (#{$spacing-unit} / 2));
+  width: calc(20% - (#{$spacing-unit} / 2));
 }
 
 .footer-col-3 {
-  width: -webkit-calc(45% - (#{$spacing-unit} / 2));
-  width:     calc(45% - (#{$spacing-unit} / 2));
+  width: calc(45% - (#{$spacing-unit} / 2));
 }
 
 @include media-query($on-laptop) {
   .footer-col-1,
   .footer-col-2 {
-    width: -webkit-calc(50% - (#{$spacing-unit} / 2));
-    width:     calc(50% - (#{$spacing-unit} / 2));
+    width: calc(50% - (#{$spacing-unit} / 2));
   }
 
   .footer-col-3 {
-    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-    width:     calc(100% - (#{$spacing-unit} / 2));
+    width: calc(100% - (#{$spacing-unit} / 2));
   }
 }
 
 @include media-query($on-palm) {
   .footer-col {
     float: none;
-    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-    width:     calc(100% - (#{$spacing-unit} / 2));
+    width: calc(100% - (#{$spacing-unit} / 2));
   }
 }
 
-
-
-/**
- * Page content
- */
 .page-content {
   padding: $spacing-unit 0;
 }
@@ -193,11 +174,6 @@
   font-size: $small-font-size;
 }
 
-
-
-/**
- * Posts
- */
 .post-header {
   margin-bottom: $spacing-unit;
 }
@@ -261,4 +237,25 @@ hr {
   border-top: 1px solid $grey-color;
   margin: #{$spacing-unit / 2} 0;
   padding: 0;
+}
+
+.note {
+  font-size: .8em;
+  background-color: #fffff3;
+  position: relative;
+  display: flow-root;
+  border: 1px solid #f2f2b2;
+  &::before {
+    content: "Note";
+    display: block;
+    padding: 0 1em;
+    background-color: #f2f2b2;
+    font-weight: bold;
+    color: black;
+  }
+
+  p {
+    padding: 0 1em;
+    color: #444;
+  }
 }

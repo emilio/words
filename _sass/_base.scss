@@ -1,17 +1,5 @@
-/**
- * Reset some basic elements
- */
-body, h1, h2, h3, h4, h5, h6,
-p, blockquote, pre, hr,
-dl, dd, ol, ul, figure {
-  margin: 0;
-  padding: 0;
-}
-
-/**
- * Basic styling
- */
 body {
+  margin: 0;
   font-family: $base-font-family;
   font-size: $base-font-size;
   line-height: $base-line-height;
@@ -21,33 +9,18 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-
-
-/**
- * Set `margin-bottom` to maintain vertical rhythm
- */
 h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
-ul, ol, dl, figure,
-%vertical-rhythm {
+ul, ol, dl, figure {
   margin-bottom: $spacing-unit / 2;
+  margin-top: $spacing-unit / 2;
 }
 
-
-
-/**
- * Images
- */
 img {
   max-width: 100%;
   vertical-align: middle;
 }
 
-
-
-/**
- * Figures
- */
 figure > img {
   display: block;
 }
@@ -56,11 +29,6 @@ figcaption {
   font-size: $small-font-size;
 }
 
-
-
-/**
- * Lists
- */
 ul, ol {
   margin-left: $spacing-unit;
 }
@@ -72,11 +40,6 @@ li {
   }
 }
 
-
-
-/**
- * Headings
- */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: $bold-text-color;
@@ -93,11 +56,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-
-
-/**
- * Links
- */
 a {
   color: $brand-color;
   text-decoration: none;
@@ -119,10 +77,6 @@ blockquote {
   font-size: 18px;
   letter-spacing: -1px;
   font-style: italic;
-
-  > :last-child {
-    margin-bottom: 0;
-  }
 }
 
 /**
@@ -157,8 +111,7 @@ pre {
  * Wrapper
  */
 .wrapper {
-  max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
-  max-width:     calc(#{$content-width} - (#{$spacing-unit} * 2));
+  max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
   margin-right: auto;
   margin-left: auto;
   padding-right: $spacing-unit;
@@ -166,18 +119,12 @@ pre {
   @extend %clearfix;
 
   @include media-query($on-laptop) {
-    max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
-    max-width:     calc(#{$content-width} - (#{$spacing-unit}));
+    max-width: calc(#{$content-width} - (#{$spacing-unit}));
     padding-right: $spacing-unit / 2;
     padding-left: $spacing-unit / 2;
   }
 }
 
-
-
-/**
- * Clearfix
- */
 %clearfix {
   &:after {
     content: "";
@@ -186,11 +133,6 @@ pre {
   }
 }
 
-
-
-/**
- * Icons
- */
 .icon {
   > svg {
     display: inline-block;
