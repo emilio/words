@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Focus changes landing in Firefox 78"
-date:   2020-02-28 22:26:00
+date:   2020-05-16 22:26:00
 ---
 
 I've been spending a bunch of time side-tracked working on focus-related things
