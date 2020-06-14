@@ -57,19 +57,19 @@ screen where the border should get painted. This can cause uneven borders.
 
 Now, **browsers here disagree on when** to do this:
 
- * Gecko, before my patch, rounds at computed value time. Which means that we'll
-   do layout with the device pixel border size.
+ * Gecko, before my patch, and WebKit, rounds at computed value time. Which
+   means that we'll do layout with the device pixel border size.
 
- * WebKit (and Blink) does layout with the subpixel border, and round the border
-   down at paint-time.
+ * Blink does layout with the subpixel border, and round the border down at
+   paint-time.
 
 There are pros and cons of both approaches.
 
-**Firefox's approach** causes borders to sometimes be smaller during layout than
-what the author expects. This can cause some unexpected layout differences,
-which is what the original bug was about.
+**Firefox and WebKit's approach** causes borders to sometimes be smaller during
+layout than what the author expects. This can cause some unexpected layout
+differences, which is what the original bug was about.
 
-**WebKit's approach** doesn't have this problem, but it has other serious
+**Blink's approach** doesn't have this problem, but it has other serious
 problems: It causes slivers from the borders to the background of the children,
 or to the same element's background if you use it in combination with
 `background-clip: padding-box`.
@@ -85,7 +85,7 @@ you can.
 
 Rounding up instead of down for this would be problematic in both situations,
 for different reasons. For Firefox, it'd mean that children using borders in
-a precise way would overflow in some resolutions but not others. For WebKit it'd
+a precise way would overflow in some resolutions but not others. For Blink it'd
 mean that semi-transparent borders would overlap with children.
 
 ## There's no perfect solution
