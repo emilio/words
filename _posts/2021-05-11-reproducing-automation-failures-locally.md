@@ -358,3 +358,58 @@ But that still fails. I try to run it on the host and it also fails. If I use
 
 So I think I'm going to try to work around it by avoiding this hacky loopback
 device thing, if I can manage to do that...
+
+In fact, a patch like this pushed to try along my changes allows me to run
+tests!
+
+```diff
+
+diff --git a/testing/mochitest/runtests.py b/testing/mochitest/runtests.py
+--- a/testing/mochitest/runtests.py
++++ b/testing/mochitest/runtests.py
+@@ -2151,17 +2151,17 @@ toolbar#nav-bar {
+                 "Increasing default timeout to {} seconds".format(extended_timeout)
+             )
+             prefs["testing.browserTestHarness.timeout"] = extended_timeout
+ 
+         if getattr(self, "testRootAbs", None):
+             prefs["mochitest.testRoot"] = self.testRootAbs
+ 
+         # See if we should use fake media devices.
+-        if options.useTestMediaDevices:
++        if False:
+             prefs["media.audio_loopback_dev"] = self.mediaDevices["audio"]
+             prefs["media.video_loopback_dev"] = self.mediaDevices["video"]
+             prefs["media.cubeb.output_device"] = "Null Output"
+             prefs["media.volume_scale"] = "1.0"
+ 
+         self.profile.set_preferences(prefs)
+ 
+         # Extra prefs from --setpref
+@@ -3045,17 +3045,17 @@ toolbar#nav-bar {
+         # https://github.com/mozilla/mozbase/blob/master/mozrunner/mozrunner/local.py#L42
+ 
+         debuggerInfo = None
+         if options.debugger:
+             debuggerInfo = mozdebug.get_debugger_info(
+                 options.debugger, options.debuggerArgs, options.debuggerInteractive
+             )
+ 
+-        if options.useTestMediaDevices:
++        if False:
+             devices = findTestMediaDevices(self.log)
+             if not devices:
+                 self.log.error("Could not find test media devices to use")
+                 return 1
+             self.mediaDevices = devices
+ 
+         # See if we were asked to run on Valgrind
+         valgrindPath = None
+ 
+```
+
+(Not a very impressive patch, I know).
+
+With that, I managed to run a whole task successfully. Takes a while though. It
+still didn't reproduce the bug I was interested in, at least not first try, but
+will try a couple more times before giving up!
