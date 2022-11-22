@@ -147,7 +147,7 @@ permissions).
 Another few tweaks to the `~/.zshrc` file were needed, since Git would refuse to
 use `GIT_EDITOR=nvim` but `GIT_EDITOR=nvim.exe` worked.
 
-This is the relevant bits of my zshrc now:
+These are the relevant bits of my zshrc now:
 
 ```
 if ! command -v nvim >/dev/null; then
