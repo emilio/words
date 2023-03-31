@@ -184,7 +184,7 @@ This involved rewriting:
  * Resizers (Mats did this in [bug 1590376](https://bugzil.la/1590376)).
  * Various buttons ([bug 1790920](https://bugzil.la/1790920)).
  * Menus ([bug 1805414](https://bugzil.la/1805414), [bug 1812329](https://bugzil.la/1812329)).
- * `<stack>, `<tabpanels>` and `<deck>` ([bug 1576946](https://bugzil.la/1576946), [bug 1689816](https://bugzil.la/1689816)). Btw,
+ * `<stack>`, `<tabpanels>` and `<deck>` ([bug 1576946](https://bugzil.la/1576946), [bug 1689816](https://bugzil.la/1689816)). Btw,
    that made me add a CSS extension to hide something visually but not for
    accessibility, which CSS usually only has hacks for.
  * `nsDocElementBoxFrame` (the root box frame which used a slightly different layout algorithm) ([bug 1792741](https://bugzil.la/1792741)).
