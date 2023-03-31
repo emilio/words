@@ -287,7 +287,7 @@ One [existing bug](https://bugzil.la/1779695) made me toggle it on all other
 in-content pages (so most dialogs and about pages).
 
 About a month later I turned it on the main Firefox UI ([bug
-1792473](https://bugzil.la/1792473)).
+1790616](https://bugzil.la/1790616)).
 
 After this, there was a long tail of windows (like the bookmarks organizer, the
 page information window, the profile manager, etc) which were still using XUL
