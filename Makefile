@@ -10,3 +10,6 @@ deploy: build
 .PHONY: serve
 serve: build
 	bundle exec jekyll serve
+
+.PHONY: setup
+	bundle config set --local path "vendor/bundle"
